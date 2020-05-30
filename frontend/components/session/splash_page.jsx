@@ -5,8 +5,6 @@ import React from 'react';
 class Splash extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {counter: 0}
-    // this.animate = this.animate.bind(this);
   }
   render() {
     return (

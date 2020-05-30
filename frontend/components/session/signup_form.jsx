@@ -22,7 +22,7 @@ class SignupForm extends React.Component {
   loginDemonUser(e) {
     e.preventDefault();
     const user = {
-      username: 'cindykuo',
+      username: 'user1',
       password: 'hunter12'
     }
     this.props.processLogin(user);

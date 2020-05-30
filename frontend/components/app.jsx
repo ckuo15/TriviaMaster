@@ -17,12 +17,10 @@ const App = (props) => {
 
   return (
     <div>
-       <Route exact path='/' component={renderedComponent} /> 
+      <Route exact path='/' component={renderedComponent} /> 
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
       <AuthRoute exact path='/login' component={LogInFormContainer} />
-      {/* <ProtectedRoute exact path='/testing' component={ProfileContainer} />
-      <ProtectedRoute path='/user/:userId' component={ProfileContainer} /> 
-      <Route path='/' component={SignupFormContainer}/> */}
+      {/* <ProtectedRoute path='/user/:userId' component={ProfileContainer} />  */}
     </div>
   )
 }
