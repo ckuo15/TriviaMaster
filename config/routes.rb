@@ -4,12 +4,12 @@ Rails.application.routes.draw do
     resources :users, only:[:create, :show, :update] do 
       resources :questions, only:[:index]
     end
+    resource :session, only:[:create, :destroy]
+    resources :questions, only:[:create, :update, :show, :destroy]
+    resources :answers, only:[:create]
+    resources :categories, only:[:index]
   end
 
-  resource :session, only:[:create, :destroy]
-  resources :questions, only:[:create, :update, :show, :destroy]
-  resources :answers, only:[:create]
-  resources :categories, only:[:index]
 
   root to: 'static_pages#root'
 end

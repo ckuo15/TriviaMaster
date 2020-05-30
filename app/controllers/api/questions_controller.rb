@@ -23,6 +23,6 @@ class Api::QuestionsController < ApplicationController
   private 
 
   def question_params 
-    params.require(:question).permit(:body, :author_id, :category_id)
+    params.require(:question).permit(:body, :user_id, :category_id)
   end
 end
