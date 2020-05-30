@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
@@ -50,9 +49,10 @@ class SignupForm extends React.Component {
     if (this.props.location.pathname === '/') {
       return (
         <div className={divClassName}>
+          <img src={window.logoURL} className='s-logo' />
           <form onSubmit={this.handleSubmit} className='signup-box'>
-            <h1>Welcome to TriviaMaster</h1>
             {this.renderErrors()}
+            <p className='sf-header'>It's trivia time! Log in or create an account below!</p>
             <div className='signup-form'>
               <input type='email' value={this.state.email} onChange={this.update('email')} placeholder='Email' />
               <input type='text' value={this.state.username} onChange={this.update('username')} placeholder='Username' />
@@ -60,18 +60,16 @@ class SignupForm extends React.Component {
               <button type='submit'>Sign Up</button>
             </div>
             <div className='demo-signup'>
-              <button className='demo-login-button-signup' onClick={this.loginDemonUser}>Demo Login</button>
+              <button className='ds-btn' onClick={this.loginDemonUser}>Demo Login</button>
             </div>
-          </form>
-          <div className='splash-ask'>
             <p className='ask-account'>Have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/login'>Log In</Link></span></p>
-          </div>
+          </form>
         </div>
       )
     } else {
       return (
         <div className='splash-container'>
-          <div className='signup-container'>
+          <div className='signup-form-container'>
             <form onSubmit={this.handleSubmit} className='signup-box'>
               <h1>TriviaMaster</h1>
               {this.renderErrors()}

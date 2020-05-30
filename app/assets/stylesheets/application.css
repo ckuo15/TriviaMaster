@@ -13,3 +13,108 @@
  *= require_tree .
  *= require_self
  */
+
+ /* css reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* styling for splash page */
+
+.signup-container{
+  background-image: url(splash-background.jpg);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-box{
+  background: rgba(255, 255, 255, 0.473);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 500px;
+  width: 450px;
+  border-radius: 10px;
+}
+
+.signup-form{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form input{
+  margin-top: 30px;
+  height: 30px;
+  width: 200px;
+  border-radius: 3px;
+  outline: none;
+}
+
+.signup-form button{
+  margin-top: 30px;
+  width: 100px;
+}
+
+.sf-header{
+  color: aqua;
+  font-size: 20px;
+}
+
+.splash-ask{
+  background: rgba(255, 255, 255, 0.473);
+
+}
+
+.ask-account{
+  color: rgb(255, 251, 13);
+  font-size: 18px;
+}
+
+.ds-btn{
+  width: 100px;
+}
