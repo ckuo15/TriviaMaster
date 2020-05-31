@@ -5,7 +5,7 @@ import { Route, Redirect, Switch, HashRouter } from 'react-router-dom';
 import Splash from './session/splash_page';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 import Mainpage from './mainpage';
-// import ProfileContainer from './profile/profile_container';
+import QuestionsIndexContainer from './questions/questions_index_container';
 
 const App = (props) => {
   let renderedComponent;
@@ -20,7 +20,7 @@ const App = (props) => {
       <Route exact path='/' component={renderedComponent} /> 
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
       <AuthRoute exact path='/login' component={LogInFormContainer} />
-      {/* <ProtectedRoute path='/user/:userId' component={ProfileContainer} />  */}
+      <Route path='/user/:userId/questions' component={QuestionsIndexContainer} /> 
     </div>
   )
 }
