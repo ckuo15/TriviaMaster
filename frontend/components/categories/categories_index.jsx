@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import CategoriesItem from './categories_item';
-class Category extends React.Component{
+class CategoryIndex extends React.Component{
   constructor(props){
     super(props);
   }
@@ -11,7 +11,7 @@ class Category extends React.Component{
   };
 
   render(){
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div>
         <ul>
@@ -22,4 +22,4 @@ class Category extends React.Component{
   }
 };
 
-export default withRouter(Category)
+export default withRouter(CategoryIndex)
