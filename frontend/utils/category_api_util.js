@@ -4,3 +4,4 @@ export const fetchCategories = () => {
     url: "/api/categories"
   })
 };
+

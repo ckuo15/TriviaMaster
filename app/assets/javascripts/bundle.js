@@ -122,16 +122,19 @@ var fetchCategories = function fetchCategories() {
 /*!**********************************************!*\
   !*** ./frontend/actions/question_actions.js ***!
   \**********************************************/
-/*! exports provided: RECEIVE_QUESTIONS, fetchQuestions */
+/*! exports provided: RECEIVE_QUESTIONS, RECEIVE_QUESTION, fetchQuestions, createQuestion */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_QUESTIONS", function() { return RECEIVE_QUESTIONS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_QUESTION", function() { return RECEIVE_QUESTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchQuestions", function() { return fetchQuestions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createQuestion", function() { return createQuestion; });
 /* harmony import */ var _utils_question_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/question_api_util */ "./frontend/utils/question_api_util.js");
 
 var RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+var RECEIVE_QUESTION = 'RECEIVE_QUESTION';
 
 var receiveQuestions = function receiveQuestions(questions) {
   return {
@@ -140,10 +143,24 @@ var receiveQuestions = function receiveQuestions(questions) {
   };
 };
 
+var receiveQuestion = function receiveQuestion(question) {
+  return {
+    type: RECEIVE_QUESTION,
+    question: question
+  };
+};
+
 var fetchQuestions = function fetchQuestions(userId) {
   return function (dispatch) {
     return _utils_question_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchQuestions"](userId).then(function (questions) {
       return dispatch(receiveQuestions(questions));
+    });
+  };
+};
+var createQuestion = function createQuestion(question) {
+  return function (dispatch) {
+    return _utils_question_api_util__WEBPACK_IMPORTED_MODULE_0__["createQuestion"](question).then(function (question) {
+      return dispatch(receiveQuestion(question));
     });
   };
 };
@@ -591,6 +608,7 @@ var Form = /*#__PURE__*/function (_React$Component) {
     _this.handleCategory = _this.handleCategory.bind(_assertThisInitialized(_this));
     _this.handleQuestion = _this.handleQuestion.bind(_assertThisInitialized(_this));
     _this.handleResponse = _this.handleResponse.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -618,76 +636,70 @@ var Form = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit() {
+      this.props.createQuestion({
+        body: this.state.question,
+        category_id: this.state.category,
+        user_id: this.props.currentUser
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      console.log(Object.values(this.props.questions));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Create New Question!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Question:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         value: this.state.question,
         onChange: this.handleQuestion
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Choices:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        value: this.state.response1,
-        onChange: this.handleResponse('response1')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        value: this.state.response2,
-        onChange: this.handleResponse('response2')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        value: this.state.response3,
-        onChange: this.handleResponse('response3')
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text",
-        value: this.state.response4,
-        onChange: this.handleResponse('response4')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Category"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onChange: this.handleCategory
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "music",
-        value: "music"
+        value: "1"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "music"
       }, "Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "animal",
-        value: "animal"
+        value: "2"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "animal"
       }, "Animal"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "biology",
-        value: "biology"
+        value: "3"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "biology"
       }, "Biology"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "history",
-        value: "history"
+        value: "4"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "history"
       }, "History"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "world",
-        value: "world"
+        value: "5"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "world"
       }, "World"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "radio",
         name: "category",
         id: "other",
-        value: "other"
+        value: "6"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         htmlFor: "other"
-      }, "Other")))));
+      }, "Other")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit"
+      }, "Add question"))));
     }
   }]);
 
@@ -717,6 +729,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    currentUser: state.session.id,
     questions: state.questions
   };
 };
@@ -725,6 +738,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchQuestions: function fetchQuestions(userId) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_1__["fetchQuestions"])(userId));
+    },
+    createQuestion: function createQuestion(question) {
+      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_1__["createQuestion"])(question));
     }
   };
 };
@@ -1654,6 +1670,8 @@ var errorsReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"]
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var questionsReducer = function questionsReducer() {
@@ -1664,6 +1682,9 @@ var questionsReducer = function questionsReducer() {
   switch (action.type) {
     case _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_QUESTIONS"]:
       return action.questions;
+
+    case _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_QUESTION"]:
+      return Object.assign({}, state, _defineProperty({}, action.question.id, action.question));
 
     default:
       return state;
@@ -1871,16 +1892,26 @@ var fetchCategories = function fetchCategories() {
 /*!*********************************************!*\
   !*** ./frontend/utils/question_api_util.js ***!
   \*********************************************/
-/*! exports provided: fetchQuestions */
+/*! exports provided: fetchQuestions, createQuestion */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchQuestions", function() { return fetchQuestions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createQuestion", function() { return createQuestion; });
 var fetchQuestions = function fetchQuestions(userId) {
   return $.ajax({
     method: "GET",
     url: "/api/users/".concat(userId, "/questions")
+  });
+};
+var createQuestion = function createQuestion(question) {
+  return $.ajax({
+    method: "POST",
+    url: 'api/questions',
+    data: {
+      question: question
+    }
   });
 };
 
