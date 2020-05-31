@@ -7,14 +7,18 @@ class QuestionIndex extends React.Component{
   }
 
   componentDidMount(){
-    this.props.fetchQuestions(this.props.match.params.userId)
+    this.props.fetchQuestions(parseInt(this.props.match.params.userId, 10))
   };
 
   render(){
-    console.log(this.props)
+    console.log(Object.values(this.props.questions))
     return(
       <div>
-        Questions
+        <ul>
+          <li>
+            {Object.values(this.props.questions).map(question => question.body)}
+          </li>
+        </ul>
       </div>
     )
   }

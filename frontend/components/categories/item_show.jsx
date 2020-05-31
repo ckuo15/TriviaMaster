@@ -1,20 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class CategoriesItem extends React.Component{
-  constructor(props){
+class CategoriesItemShow extends React.Component {
+  constructor(props) {
     super(props)
   }
 
-  render(){
+  render() {
     // console.log(this.props.category)
-    return(
+    return (
       <div>
-          <p>{this.props.category}</p>
+        <p>hi</p>
 
       </div>
     )
   }
 };
 
-export default CategoriesItem;
+export default CategoriesItemShow;

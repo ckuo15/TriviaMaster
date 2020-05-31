@@ -11,8 +11,8 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     class_name: :Question
 
-    has_many :categorieschosen
-    has_many :categories, through: :categorieschosen
+    #has_many :categorieschosen
+    #has_many :categories, through: :categorieschosen
 
     def self.generate_session_token
         SecureRandom.urlsafe_base64(16)

@@ -12,6 +12,11 @@ class Api::AnswersController < ApplicationController
     Answer.find_by(params[:id])
   end 
 
+  def index
+    question = Question.find(params[:question_id])
+    @answers = question.answers.includes(:question)
+    render :index
+  end 
 
   private
 
