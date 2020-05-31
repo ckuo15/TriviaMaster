@@ -10,3 +10,5 @@ const receiveCategories = categories => ({
 export const fetchCategories = () => dispatch => (
   CategoryAPIUtil.fetchCategories().then(categories => (dispatch(receiveCategories(categories))))
 );
+
+

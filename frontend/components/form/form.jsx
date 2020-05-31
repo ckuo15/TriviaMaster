@@ -15,6 +15,7 @@ class Form extends React.Component {
     this.handleCategory = this.handleCategory.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleCategory(e){
@@ -35,8 +36,14 @@ class Form extends React.Component {
     }
   };
 
+  handleSubmit(){
+    this.props.createQuestion({
+      body: this.state.question, 
+      category_id: this.state.category, 
+      user_id: this.props.currentUser})
+  }
+
   render() {
-    console.log(Object.values(this.props.questions))
     return (
       <div>
         <p>Create New Question!</p>
@@ -44,26 +51,27 @@ class Form extends React.Component {
           <form onSubmit={this.handleSubmit}>
               <p>Question:</p>
               <input type='text' value={this.state.question} onChange={this.handleQuestion}/>
-              <p>Choices:</p>
+              {/* <p>Choices:</p>
               <input type='text'value={this.state.response1} onChange={this.handleResponse('response1')}/>
               <input type='text' value={this.state.response2} onChange={this.handleResponse('response2')}/>
               <input type='text' value={this.state.response3} onChange={this.handleResponse('response3')}/>
-              <input type='text' value={this.state.response4} onChange={this.handleResponse('response4')}/>
+              <input type='text' value={this.state.response4} onChange={this.handleResponse('response4')}/> */}
               <p>Category</p>
               <div onChange={this.handleCategory}>
-                <input type='radio' name='category' id='music' value='music'/>
+                <input type='radio' name='category' id='music' value='1'/>
                 <label htmlFor='music'>Music</label>
-                <input type='radio' name='category' id='animal' value='animal' />
+                <input type='radio' name='category' id='animal' value='2' />
                 <label htmlFor='animal'>Animal</label>
-                <input type='radio' name='category' id='biology' value='biology'  />
+                <input type='radio' name='category' id='biology' value='3'  />
                 <label htmlFor='biology'>Biology</label>
-                <input type='radio' name='category' id='history' value='history'/>
+                <input type='radio' name='category' id='history' value='4'/>
                 <label htmlFor='history'>History</label>
-                <input type='radio' name='category' id='world' value='world' />
+                <input type='radio' name='category' id='world' value='5' />
                 <label htmlFor='world'>World</label>
-                <input type='radio' name='category' id='other' value='other' />
+                <input type='radio' name='category' id='other' value='6' />
                 <label htmlFor='other'>Other</label>
               </div>
+              <button type='submit'>Add question</button>
           </form>
         </div>
       </div>
