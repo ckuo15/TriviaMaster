@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -57,10 +58,10 @@ class SignupForm extends React.Component {
               <input type='email' value={this.state.email} onChange={this.update('email')} placeholder='Email' />
               <input type='text' value={this.state.username} onChange={this.update('username')} placeholder='Username' />
               <input type='password' value={this.state.password} onChange={this.update('password')} placeholder='Password' />
-              <button type='submit'>Sign Up</button>
+              <Button variant='contained' color='primary' type='submit'>Sign Up</Button>
             </div>
             <div className='demo-signup'>
-              <button className='ds-btn' onClick={this.loginDemonUser}>Demo Login</button>
+              <Button variant='contained' color='primary' className='ds-btn' onClick={this.loginDemonUser}>Demo Login</Button>
             </div>
             <p className='ask-account'>Have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/login'>Log In</Link></span></p>
           </form>

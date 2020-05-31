@@ -7,6 +7,6 @@ const receiveQuestions = questions => ({
   questions
 });
 
-export const fetchQuestions = () => dispatch => (
-  QuestionAPIUtil.fetchQuestions().then(questions => (dispatch(receiveQuestions(questions))))
+export const fetchQuestions = (userId) => dispatch => (
+  QuestionAPIUtil.fetchQuestions(userId).then(questions => (dispatch(receiveQuestions(questions))))
 );

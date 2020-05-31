@@ -18,6 +18,12 @@ class NavBar extends React.Component {
       <div>
         <img src={navbarLogo}/>
         <button onClick={this.handleSubmit}>Log out</button>
+        <Link to={`/users/${this.props.currentUser}/questions`}>
+          show all questions
+        </Link>
+        <Link to="/create">
+          create new question
+        </Link>
       </div>
     )
   }

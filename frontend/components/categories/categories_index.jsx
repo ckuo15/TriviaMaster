@@ -15,7 +15,10 @@ class CategoryIndex extends React.Component{
     return(
       <div>
         <ul>
-          {Object.values(this.props.categories).map(category => <CategoriesItem key={category.id} categoryName={category.name}/>)}
+            {Object.values(this.props.categories).map(category =>
+              <CategoriesItem key={category.id} categoryId={category.id} category={category.name}>{category.name}</CategoriesItem>
+            )
+            }
         </ul>
       </div>
     )

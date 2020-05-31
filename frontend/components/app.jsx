@@ -6,6 +6,7 @@ import Splash from './session/splash_page';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 import Mainpage from './mainpage';
 import QuestionsIndexContainer from './questions/questions_index_container';
+import FormContainer from './form/form_container';
 
 const App = (props) => {
   let renderedComponent;
@@ -20,7 +21,10 @@ const App = (props) => {
       <Route exact path='/' component={renderedComponent} /> 
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
       <AuthRoute exact path='/login' component={LogInFormContainer} />
-      <Route path='/user/:userId/questions' component={QuestionsIndexContainer} /> 
+      <Route path='/users/:userId/questions' component={QuestionsIndexContainer} />
+      {/* <Route path='/categories/:categoryId' component={CategoriesItem}/> */}
+      <Route path='/create' component={FormContainer} />
+
     </div>
   )
 }
