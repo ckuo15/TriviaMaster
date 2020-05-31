@@ -118,3 +118,9 @@ table {
 .ds-btn{
   width: 100px;
 }
+
+/* styling for main page */
+
+.mainpage-container{
+  background-color: grey;
+}

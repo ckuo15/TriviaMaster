@@ -16,7 +16,7 @@ class Api::QuestionsController < ApplicationController
 
   def index 
     user = User.find(params[:user_id])
-    @questions = user.questions.includes(:user, answers:[:user])
+    @questions = user.questions.includes(:user)
     render :index
   end 
 
