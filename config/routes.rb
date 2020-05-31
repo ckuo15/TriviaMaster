@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     end
     resource :session, only:[:create, :destroy]
     resources :questions, only:[:create, :update, :show, :destroy]
-    resources :answers, only:[:create]
-    resources :categories, only:[:index]
+    resources :answers, only:[:create, :show]
+    resources :categories, only:[:index, :show]
   end
 
 

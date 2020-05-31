@@ -17,7 +17,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <img src={navbarLogo}/>
-        <button>Log out</button>
+        <button onClick={this.handleSubmit}>Log out</button>
       </div>
     )
   }
