@@ -15,7 +15,7 @@
   - SASS
   - jQuery
   
- ##Features:
+ ## Features:
   * User authentication
   * Question and answer creation
   * Categories
