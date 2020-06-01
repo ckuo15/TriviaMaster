@@ -62,7 +62,7 @@ table {
 /* styling for splash page */
 
 .signup-container{
-  background-image: url("splash-background.jpg");
+  background-image: image-url("splash-background.jpg");
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -149,7 +149,7 @@ table {
 /* styling for main page */
 
 .mainpage-container{
-  background-image: url("/assets/splash-background.jpg");
+  background-image: image-url("splash-background.jpg");
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -234,7 +234,7 @@ table {
 /* styling for question form */
 
 .question-page-container{
-  background-image: url("/assets/splash-background.jpg");
+  background-image: image-url("splash-background.jpg");
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -287,7 +287,7 @@ table {
 /* styling for all questions page */
 
 .questions-index-container{
-  background-image: url("/assets/splash-background.jpg");
+  background-image: image-url("splash-background.jpg");
   height: 100vh;
   display: flex;
   flex-direction: column;
