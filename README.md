@@ -2,7 +2,7 @@
 
 #### To run on local machine, please run rails s, npm run webpack, and navigate to http://localhost:3000/#/
 
-[Live Link](http://trivia-masterr.herokuapp.com/#/)
+## [Live Link](http://trivia-masterr.herokuapp.com/#/)
 
 ### Technologies used: 
   - Ruby on Rails
