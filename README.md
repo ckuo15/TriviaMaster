@@ -1,6 +1,6 @@
 # Trivia Master
 
-#### To run on local machine, please run rails s (rails server), npm run webpack, and navigate to http://localhost:3000/#/
+#### To run on local machine, please run bundle install, npm install, rails s (rails server), npm run webpack, and navigate to http://localhost:3000/#/
 
 ## [Live Link](http://trivia-masterr.herokuapp.com/#/)
 
