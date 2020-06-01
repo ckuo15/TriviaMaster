@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link, withRouter } from 'react-router-dom';
 import NavBar from '../navbar/navbar_container';
-import createTypography from '@material-ui/core/styles/createTypography';
 
 class QuestionIndex extends React.Component{
   constructor(props){

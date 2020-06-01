@@ -20,7 +20,6 @@ class Form extends React.Component {
 
   componentDidMount(){
     this.props.fetchQuestions(this.props.currentUser)
-    // .then(() => console.log((Object.keys(this.props.questions).length)))
   }
 
   handleCategory(e){

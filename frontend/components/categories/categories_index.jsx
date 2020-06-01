@@ -11,7 +11,6 @@ class CategoryIndex extends React.Component{
   };
 
   render(){
-    // console.log(this.props)
     return(
       <div className='categories-container'>
         <ul>
@@ -29,4 +28,3 @@ class CategoryIndex extends React.Component{
 
 export default withRouter(CategoryIndex)
 
-//have a link that takes them to /category
