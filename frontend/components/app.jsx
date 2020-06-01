@@ -7,6 +7,7 @@ import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 import Mainpage from './mainpage';
 import QuestionsIndexContainer from './questions/questions_index_container';
 import FormContainer from './form/form_container';
+import CategoryItemShow from './categories/item_show';
 
 const App = (props) => {
   let renderedComponent;
@@ -24,7 +25,7 @@ const App = (props) => {
       <Route path='/users/:userId/questions' component={QuestionsIndexContainer} />
       {/* <Route path='/categories/:categoryId' component={CategoriesItem}/> */}
       <Route path='/create' component={FormContainer} />
-
+      <Route path='/categories/:categoryId' component={CategoryItemShow}/>
     </div>
   )
 }

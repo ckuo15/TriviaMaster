@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button, TextField } from '@material-ui/core';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -49,21 +50,19 @@ class LoginForm extends React.Component {
     return (
       <div className='splash-container'>
         <div className='signup-container'>
+          <img src={window.logoURL} className='l-logo' />
           <form onSubmit={this.handleSubmit} className='login-box'>
-            <h1>TriviaMaster</h1>
             {this.renderErrors()}
             <div className='login-form'>
-              <input type='text' value={this.state.username} onChange={this.update('username')} placeholder='Username' />
-              <input type='password' value={this.state.password} onChange={this.update('password')} placeholder='Password' />
-              <button type='submit'>Log In</button>
+              <p>Username:</p>
+              <TextField id='standard-basic' type='text' value={this.state.username} onChange={this.update('username')}/>
+              <p>Password:</p>
+              <TextField id='standard-basic' type='password' value={this.state.password} onChange={this.update('password')}/>
             </div>
-            <div className='demo-login'>
-              <button className='demo-login-button-login' onClick={this.loginDemonUser}>Demo Login</button>
-            </div>
+            <Button variant='contained' color='primary'type='submit'>Log In</Button>
+            <Button variant='contained' color='primary' className='demo-login-button-login' onClick={this.loginDemonUser}>Demo Login</Button>
+            <p className='ask-account'>Don't have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/'>Sign Up</Link></span></p>
           </form>
-          <div className='splash-login-ask'>
-            <p className='ask-account'>Don't have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/signup'>Sign Up</Link></span></p>
-          </div>
         </div>
       </div>
     )

@@ -71,7 +71,7 @@ table {
 }
 
 .signup-box{
-  background: rgba(255, 255, 255, 0.473);
+  background: rgba(255, 255, 255, 0.692);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,30 +79,38 @@ table {
   height: 500px;
   width: 450px;
   border-radius: 10px;
+  font-family: sans-serif;
 }
 
 .signup-form{
   display:flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.signup-form p{
+  border-top: 10px;
 }
 
 .signup-form input{
-  margin-top: 30px;
   height: 30px;
   width: 200px;
   border-radius: 3px;
   outline: none;
 }
 
+
 .signup-form button{
-  margin-top: 30px;
   width: 100px;
 }
 
 .sf-header{
-  color: aqua;
-  font-size: 20px;
+  color: rgb(41, 250, 250);
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .splash-ask{
@@ -111,16 +119,102 @@ table {
 }
 
 .ask-account{
-  color: rgb(255, 251, 13);
+  color: black;
   font-size: 18px;
 }
 
-.ds-btn{
-  width: 100px;
+.ask-account a{
+  color: blue;
+  text-decoration: none;
+  font-size: 17px;
 }
+
+.login{
+  color: black;
+}
+
+.signup-btn{
+  width: 130px;
+}
+
+.ds-btn{
+  width: 130px;
+}
+
+.signup-errors{
+  color: red;
+  border-bottom: 10px;
+}
+
 
 /* styling for main page */
 
 .mainpage-container{
-  background-color: grey;
+  background-image: url('splash-background.jpg');
+  height: 100vh;
+}
+
+.categories-container{
+  width: 100px;
+  column-count: 2;
+}
+
+/* styling for nav bar */
+
+.navbar-container{
+  background: rgba(0, 0, 0, 0.699);
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+.nav-right{
+  margin-right: 30px;
+}
+
+.nav-logo{
+  margin-left: 30px;
+}
+
+.view-questions, .create-question{
+  color: white;
+  margin-right: 40px;
+}
+
+.view-questions:hover, .create-question:hover{
+  text-decoration: underline;
+}
+
+/* styling for log in page */
+
+.login-box{
+  background: rgba(255, 255, 255, 0.692);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 500px;
+  width: 450px;
+  border-radius: 10px;
+  font-family: sans-serif;
+}
+
+.login-form{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+}
+
+/* styling for question form */
+
+.question-page-container{
+  background-image: url('splash-background.jpg');
+  height: 100vh;
+}
+
+.form-container{
+  background:white;
 }

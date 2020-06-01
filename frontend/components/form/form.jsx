@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import NavBar from '../navbar/navbar_container';
 
 class Form extends React.Component {
   constructor(props) {
@@ -45,9 +46,10 @@ class Form extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Create New Question!</p>
-        <div>
+      <div className='question-page-container'>
+        <NavBar/>
+        <div className='form-container'>
+          <p>Create New Question!</p>
           <form onSubmit={this.handleSubmit}>
               <p>Question:</p>
               <input type='text' value={this.state.question} onChange={this.handleQuestion}/>

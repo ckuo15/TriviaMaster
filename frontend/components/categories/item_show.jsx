@@ -18,3 +18,5 @@ class CategoriesItemShow extends React.Component {
 };
 
 export default CategoriesItemShow;
+
+//fetch it based on category id

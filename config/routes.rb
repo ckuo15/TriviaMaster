@@ -5,9 +5,9 @@ Rails.application.routes.draw do
       resources :questions, only:[:index]
     end
     resource :session, only:[:create, :destroy]
+    resources :categories, only:[:index, :show]
     resources :questions, only:[:create, :update, :show, :destroy]
     resources :answers, only:[:create, :show]
-    resources :categories, only:[:index, :show]
   end
 
 

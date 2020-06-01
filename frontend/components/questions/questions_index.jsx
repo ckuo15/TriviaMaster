@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, withRouter } from 'react-router-dom';
+import NavBar from '../navbar/navbar_container';
 
 class QuestionIndex extends React.Component{
   constructor(props){
@@ -14,6 +15,7 @@ class QuestionIndex extends React.Component{
     console.log(Object.values(this.props.questions))
     return(
       <div>
+        <NavBar/>
         <ul>
           <li>
             {Object.values(this.props.questions).map(question => question.body)}

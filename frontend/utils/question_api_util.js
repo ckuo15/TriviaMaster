@@ -13,3 +13,10 @@ export const createQuestion = question => {
     data: {question}
   })
 }
+
+export const fetchCategoryQuestions = category_id => {
+  return $.ajax({
+    method: "GET",
+    url: `api/questions/categoryIndex/${category_id}/questions`
+  })
+}
