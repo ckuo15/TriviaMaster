@@ -14,13 +14,18 @@ class QuestionIndex extends React.Component{
   render(){
     console.log(Object.values(this.props.questions))
     return(
-      <div>
+      <div className='questions-index-container'>
         <NavBar/>
-        <ul>
-          <li>
-            {Object.values(this.props.questions).map(question => question.body)}
-          </li>
-        </ul>
+        <div className='q-index-item-container'>
+          <p className='qi-title'>All Questions</p>
+          <div className='questions-index'>
+            <ul className='cateogory-names-container'>
+              {Object.values(this.props.questions).map(question => 
+              <li className="category-name-item">{question.body}</li>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     )
   }

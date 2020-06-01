@@ -32,7 +32,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: sans-serif;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -79,7 +79,6 @@ table {
   height: 500px;
   width: 450px;
   border-radius: 10px;
-  font-family: sans-serif;
 }
 
 .signup-form{
@@ -167,6 +166,10 @@ table {
   justify-content: space-between;
   align-items: center;
   height: 100px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .nav-right{
@@ -175,6 +178,8 @@ table {
 
 .nav-logo{
   margin-left: 30px;
+  height: 70px;
+  width: 250px;
 }
 
 .view-questions, .create-question{
@@ -197,7 +202,6 @@ table {
   height: 500px;
   width: 450px;
   border-radius: 10px;
-  font-family: sans-serif;
 }
 
 .login-form{
@@ -213,8 +217,100 @@ table {
 .question-page-container{
   background-image: url('splash-background.jpg');
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form-container{
-  background:white;
+  background:rgba(255, 255, 255, 0.774);
+  width: 600px;
+  height: 500px;
+  margin-top: 100px;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-form{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.question-form p{
+  margin-top: 30px;
+}
+
+.form-title{
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.form-category{
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+.form-category input{
+  margin-right: 10px;
+}
+
+.form-category label{
+  margin-right: 10px;
+}
+
+/* styling for all questions page */
+
+.questions-index-container{
+  background-image: url('splash-background.jpg');
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.questions-index{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.863);
+  height: 400px;
+  border-radius: 10px;
+  margin-top: 10px;
+
+  overflow-y: auto;
+}
+.category-names-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.category-name-item{
+  height: 50px;
+  width: 500px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.qi-title{
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: white;
+}
+
+.q-index-item-container{
+  margin-top: 40px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
