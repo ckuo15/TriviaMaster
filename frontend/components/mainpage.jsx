@@ -6,7 +6,7 @@ const Mainpage = () => {
   return (
     <div className='mainpage-container'>
       <NavBar/>
-      <Categories/>
+      {/* <Categories/> */}
     </div>
   )
 };

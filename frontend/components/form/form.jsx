@@ -8,18 +8,15 @@ class Form extends React.Component {
     super(props);
     this.state={
       question: '',
-      response1: '',
-      response2: '',
-      response3: '',
-      response4: '',
+      response: '',
       category:''
     }
     this.handleCategory = this.handleCategory.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleResponse = this.handleResponse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleAnswer = this.handleAnswer.bind(this);
   }
-
 
   handleCategory(e){
     this.setState({
@@ -39,15 +36,25 @@ class Form extends React.Component {
     }
   };
 
+  handleAnswer(){
+    this.props.createAnswer({
+      body: this.state.response,
+      question_id: parseInt(Object.keys(this.props.questions)[0])
+    })
+  }
+
   handleSubmit(e){
     e.preventDefault();
     this.props.createQuestion({
       body: this.state.question, 
       category_id: this.state.category, 
       user_id: this.props.currentUser
-    }).then(() => {this.setState({question: '', category: ''})})
+    }).then(() => {
+      this.setState({question:'', response:''})
+    }).then(()=> {this.handleAnswer})
   }
 
+  // parseInt(Object.keys(this.props.questions)[0])
   render() {
     return (
       <div className='question-page-container'>
@@ -56,12 +63,9 @@ class Form extends React.Component {
           <form onSubmit={this.handleSubmit} className='question-form'>
               <p className='form-title'>Create New Question!</p>
               <p>Question:</p>
-            <TextField id="outlined-basic" autoComplete='off'type='text' fullWidth value={this.state.question} onChange={this.handleQuestion}/>
-              {/* <p>Choices:</p>
-              <input type='text'value={this.state.response1} onChange={this.handleResponse('response1')}/>
-              <input type='text' value={this.state.response2} onChange={this.handleResponse('response2')}/>
-              <input type='text' value={this.state.response3} onChange={this.handleResponse('response3')}/>
-              <input type='text' value={this.state.response4} onChange={this.handleResponse('response4')}/> */}
+              <TextField id="outlined-basic" autoComplete='off'type='text' fullWidth value={this.state.question} onChange={this.handleQuestion}/>
+              <p>Answer:</p>
+              <input type='text'value={this.state.response1} onChange={this.handleResponse('response')}/>
               <p>Pick a Category:</p>
               <div onChange={this.handleCategory} className='form-category'>
                 <input type='radio' name='category' id='music' value='1' checked={this.state.category === "1"}/>

@@ -151,11 +151,30 @@ table {
 .mainpage-container{
   background-image: url('splash-background.jpg');
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .categories-container{
   width: 100px;
   column-count: 2;
+  
+}
+
+.categories-container{
+  margin-top: 100px;
+  background: white;
+  width: 500px;
+  height: 300px;
+}
+
+.categories-container ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* styling for nav bar */
@@ -313,4 +332,17 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.q-question-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+
+}
+
+.q-category-item{
+  margin-left: 10px;
+  color: blue;
 }

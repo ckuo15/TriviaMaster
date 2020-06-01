@@ -86,6 +86,55 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/answer_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/answer_actions.js ***!
+  \********************************************/
+/*! exports provided: RECEIVE_ANSWERS, RECEIVE_ANSWER, fetchAnswers, createAnswer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ANSWERS", function() { return RECEIVE_ANSWERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ANSWER", function() { return RECEIVE_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAnswers", function() { return fetchAnswers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAnswer", function() { return createAnswer; });
+/* harmony import */ var _utils_answer_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/answer_api_util */ "./frontend/utils/answer_api_util.js");
+
+var RECEIVE_ANSWERS = 'RECEIVE_ANSWERS';
+var RECEIVE_ANSWER = 'RECEIVE_ANSWER';
+
+var receiveAnswers = function receiveAnswers(answers) {
+  return {
+    type: RECEIVE_ANSWERS,
+    questions: questions
+  };
+};
+
+var receiveAnswer = function receiveAnswer(answer) {
+  return {
+    type: RECEIVE_ANSWER,
+    answer: answer
+  };
+};
+
+var fetchAnswers = function fetchAnswers(userId, questionId) {
+  return function (dispatch) {
+    return _utils_answer_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswers"](userId, questionId).then(function (answers) {
+      return dispatch(receiveAnswers(answers));
+    });
+  };
+};
+var createAnswer = function createAnswer(answer) {
+  return function (dispatch) {
+    return _utils_answer_api_util__WEBPACK_IMPORTED_MODULE_0__["createAnswer"](answer).then(function (answer) {
+      return dispatch(receiveAnswer(answer));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/category_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/category_actions.js ***!
@@ -635,16 +684,14 @@ var Form = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       question: '',
-      response1: '',
-      response2: '',
-      response3: '',
-      response4: '',
+      response: '',
       category: ''
     };
     _this.handleCategory = _this.handleCategory.bind(_assertThisInitialized(_this));
     _this.handleQuestion = _this.handleQuestion.bind(_assertThisInitialized(_this));
     _this.handleResponse = _this.handleResponse.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.handleAnswer = _this.handleAnswer.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -672,6 +719,14 @@ var Form = /*#__PURE__*/function (_React$Component) {
       };
     }
   }, {
+    key: "handleAnswer",
+    value: function handleAnswer() {
+      this.props.createAnswer({
+        body: this.state.response,
+        question_id: parseInt(Object.keys(this.props.questions)[0])
+      });
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       var _this3 = this;
@@ -684,10 +739,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
       }).then(function () {
         _this3.setState({
           question: '',
-          category: ''
+          response: ''
         });
+      }).then(function () {
+        _this3.handleAnswer;
       });
-    }
+    } // parseInt(Object.keys(this.props.questions)[0])
+
   }, {
     key: "render",
     value: function render() {
@@ -707,6 +765,10 @@ var Form = /*#__PURE__*/function (_React$Component) {
         fullWidth: true,
         value: this.state.question,
         onChange: this.handleQuestion
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Answer:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.response1,
+        onChange: this.handleResponse('response')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Pick a Category:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onChange: this.handleCategory,
         className: "form-category"
@@ -785,7 +847,9 @@ var Form = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/question_actions */ "./frontend/actions/question_actions.js");
-/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./form */ "./frontend/components/form/form.jsx");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./form */ "./frontend/components/form/form.jsx");
+
 
 
 
@@ -804,11 +868,17 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createQuestion: function createQuestion(question) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_1__["createQuestion"])(question));
+    },
+    fetchAnswers: function fetchAnswers(userId, questionId) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAnswers"])(userId, questionId));
+    },
+    createAnswer: function createAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["createAnswer"])(answer));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_form__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_form__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -832,7 +902,7 @@ __webpack_require__.r(__webpack_exports__);
 var Mainpage = function Mainpage() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mainpage-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_categories_categories_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_1__["default"], null));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Mainpage);
@@ -982,6 +1052,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../navbar/navbar_container */ "./frontend/components/navbar/navbar_container.js");
+/* harmony import */ var _material_ui_core_styles_createTypography__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles/createTypography */ "./node_modules/@material-ui/core/styles/createTypography.js");
+/* harmony import */ var _material_ui_core_styles_createTypography__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles_createTypography__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1008,6 +1080,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var QuestionIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(QuestionIndex, _React$Component);
 
@@ -1028,6 +1101,14 @@ var QuestionIndex = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       console.log(Object.values(this.props.questions));
+      var categoryName = {
+        1: "Music",
+        2: "Animal",
+        3: "Biology",
+        4: "History",
+        5: "World",
+        6: "Other"
+      };
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "questions-index-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navbar_navbar_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1039,9 +1120,14 @@ var QuestionIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "cateogory-names-container"
       }, Object.values(this.props.questions).map(function (question) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          className: "category-name-item"
-        }, question.body);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "q-question-item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "category-name-item",
+          key: question.category_id
+        }, question.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+          className: "q-category-item"
+        }, "Category: ", categoryName[question.category_id]));
       })))));
     }
   }]);
@@ -1644,6 +1730,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/answers.reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/answers.reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var answerReducer = function answerReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWERS"]:
+      return action.answers;
+
+    case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWER"]:
+      return Object.assign({}, state, _defineProperty({}, action.answer.id, action.answer));
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (answerReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/categories_reducer.js":
 /*!*************************************************!*\
   !*** ./frontend/reducers/categories_reducer.js ***!
@@ -1765,6 +1886,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _categories_reducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./categories_reducer */ "./frontend/reducers/categories_reducer.js");
 /* harmony import */ var _questions_reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./questions_reducer */ "./frontend/reducers/questions_reducer.js");
+/* harmony import */ var _answers_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./answers.reducer */ "./frontend/reducers/answers.reducer.js");
+
 
 
 
@@ -1778,7 +1901,8 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_4__["default"],
   entities: _entities_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
   categories: _categories_reducer__WEBPACK_IMPORTED_MODULE_5__["default"],
-  questions: _questions_reducer__WEBPACK_IMPORTED_MODULE_6__["default"]
+  questions: _questions_reducer__WEBPACK_IMPORTED_MODULE_6__["default"],
+  answers: _answers_reducer__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -1923,6 +2047,35 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/utils/answer_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/utils/answer_api_util.js ***!
+  \*******************************************/
+/*! exports provided: fetchAnswers, createAnswer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAnswers", function() { return fetchAnswers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAnswer", function() { return createAnswer; });
+var fetchAnswers = function fetchAnswers(userId, questionId) {
+  return $.ajax({
+    method: "GET",
+    url: "/api/users/".concat(userId, "/questions/").concat(questionId, "/answers")
+  });
+};
+var createAnswer = function createAnswer(answer) {
+  return $.ajax({
+    method: "POST",
+    url: 'api/answers',
+    data: {
+      answer: answer
+    }
+  });
+};
+
+/***/ }),
+
 /***/ "./frontend/utils/category_api_util.js":
 /*!*********************************************!*\
   !*** ./frontend/utils/category_api_util.js ***!
@@ -1946,14 +2099,13 @@ var fetchCategories = function fetchCategories() {
 /*!*********************************************!*\
   !*** ./frontend/utils/question_api_util.js ***!
   \*********************************************/
-/*! exports provided: fetchQuestions, createQuestion, fetchCategoryQuestions */
+/*! exports provided: fetchQuestions, createQuestion */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchQuestions", function() { return fetchQuestions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createQuestion", function() { return createQuestion; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCategoryQuestions", function() { return fetchCategoryQuestions; });
 var fetchQuestions = function fetchQuestions(userId) {
   return $.ajax({
     method: "GET",
@@ -1967,12 +2119,6 @@ var createQuestion = function createQuestion(question) {
     data: {
       question: question
     }
-  });
-};
-var fetchCategoryQuestions = function fetchCategoryQuestions(category_id) {
-  return $.ajax({
-    method: "GET",
-    url: "api/questions/categoryIndex/".concat(category_id, "/questions")
   });
 };
 
@@ -2665,6 +2811,110 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return Object(_arrayLikeToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(o, minLen);
 }
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/extends.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/extends.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+
+module.exports = _interopRequireDefault;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/objectWithoutProperties.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var objectWithoutPropertiesLoose = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js");
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutProperties;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+module.exports = _objectWithoutPropertiesLoose;
 
 /***/ }),
 
@@ -38601,6 +38851,124 @@ var withWidth = function withWidth() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (withWidth);
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/core/styles/createTypography.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/@material-ui/core/styles/createTypography.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = createTypography;
+
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/extends.js"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/objectWithoutProperties.js"));
+
+var _utils = __webpack_require__(/*! @material-ui/utils */ "./node_modules/@material-ui/utils/esm/index.js");
+
+function round(value) {
+  return Math.round(value * 1e5) / 1e5;
+}
+
+var caseAllCaps = {
+  textTransform: 'uppercase'
+};
+var defaultFontFamily = '"Roboto", "Helvetica", "Arial", sans-serif';
+/**
+ * @see @link{https://material.io/design/typography/the-type-system.html}
+ * @see @link{https://material.io/design/typography/understanding-typography.html}
+ */
+
+function createTypography(palette, typography) {
+  var _ref = typeof typography === 'function' ? typography(palette) : typography,
+      _ref$fontFamily = _ref.fontFamily,
+      fontFamily = _ref$fontFamily === void 0 ? defaultFontFamily : _ref$fontFamily,
+      _ref$fontSize = _ref.fontSize,
+      fontSize = _ref$fontSize === void 0 ? 14 : _ref$fontSize,
+      _ref$fontWeightLight = _ref.fontWeightLight,
+      fontWeightLight = _ref$fontWeightLight === void 0 ? 300 : _ref$fontWeightLight,
+      _ref$fontWeightRegula = _ref.fontWeightRegular,
+      fontWeightRegular = _ref$fontWeightRegula === void 0 ? 400 : _ref$fontWeightRegula,
+      _ref$fontWeightMedium = _ref.fontWeightMedium,
+      fontWeightMedium = _ref$fontWeightMedium === void 0 ? 500 : _ref$fontWeightMedium,
+      _ref$fontWeightBold = _ref.fontWeightBold,
+      fontWeightBold = _ref$fontWeightBold === void 0 ? 700 : _ref$fontWeightBold,
+      _ref$htmlFontSize = _ref.htmlFontSize,
+      htmlFontSize = _ref$htmlFontSize === void 0 ? 16 : _ref$htmlFontSize,
+      allVariants = _ref.allVariants,
+      pxToRem2 = _ref.pxToRem,
+      other = (0, _objectWithoutProperties2.default)(_ref, ["fontFamily", "fontSize", "fontWeightLight", "fontWeightRegular", "fontWeightMedium", "fontWeightBold", "htmlFontSize", "allVariants", "pxToRem"]);
+
+  if (true) {
+    if (typeof fontSize !== 'number') {
+      console.error('Material-UI: `fontSize` is required to be a number.');
+    }
+
+    if (typeof htmlFontSize !== 'number') {
+      console.error('Material-UI: `htmlFontSize` is required to be a number.');
+    }
+  }
+
+  var coef = fontSize / 14;
+
+  var pxToRem = pxToRem2 || function (size) {
+    return "".concat(size / htmlFontSize * coef, "rem");
+  };
+
+  var buildVariant = function buildVariant(fontWeight, size, lineHeight, letterSpacing, casing) {
+    return (0, _extends2.default)((0, _extends2.default)((0, _extends2.default)({
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      fontSize: pxToRem(size),
+      // Unitless following https://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/
+      lineHeight: lineHeight
+    }, fontFamily === defaultFontFamily ? {
+      letterSpacing: "".concat(round(letterSpacing / size), "em")
+    } : {}), casing), allVariants);
+  };
+
+  var variants = {
+    h1: buildVariant(fontWeightLight, 96, 1.167, -1.5),
+    h2: buildVariant(fontWeightLight, 60, 1.2, -0.5),
+    h3: buildVariant(fontWeightRegular, 48, 1.167, 0),
+    h4: buildVariant(fontWeightRegular, 34, 1.235, 0.25),
+    h5: buildVariant(fontWeightRegular, 24, 1.334, 0),
+    h6: buildVariant(fontWeightMedium, 20, 1.6, 0.15),
+    subtitle1: buildVariant(fontWeightRegular, 16, 1.75, 0.15),
+    subtitle2: buildVariant(fontWeightMedium, 14, 1.57, 0.1),
+    body1: buildVariant(fontWeightRegular, 16, 1.5, 0.15),
+    body2: buildVariant(fontWeightRegular, 14, 1.43, 0.15),
+    button: buildVariant(fontWeightMedium, 14, 1.75, 0.4, caseAllCaps),
+    caption: buildVariant(fontWeightRegular, 12, 1.66, 0.4),
+    overline: buildVariant(fontWeightRegular, 12, 2.66, 1, caseAllCaps)
+  };
+  return (0, _utils.deepmerge)((0, _extends2.default)({
+    htmlFontSize: htmlFontSize,
+    pxToRem: pxToRem,
+    round: round,
+    // TODO v5: remove
+    fontFamily: fontFamily,
+    fontSize: fontSize,
+    fontWeightLight: fontWeightLight,
+    fontWeightRegular: fontWeightRegular,
+    fontWeightMedium: fontWeightMedium,
+    fontWeightBold: fontWeightBold
+  }, variants), other, {
+    clone: false // No need to clone deep
+
+  });
+}
 
 /***/ }),
 
