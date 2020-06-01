@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -46,52 +46,29 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    let divClassName = 'signup-container'
-    if (this.props.location.pathname === '/') {
-      return (
-        <div className={divClassName}>
-          <img src={window.logoURL} className='s-logo' />
-          <form onSubmit={this.handleSubmit} className='signup-box'>
-            {this.renderErrors()}
-            <p className='sf-header'>It's trivia time! Log in or create an account below!</p>
-            <div className='signup-form'>
-              <input type='email' value={this.state.email} onChange={this.update('email')} placeholder='Email' />
-              <input type='text' value={this.state.username} onChange={this.update('username')} placeholder='Username' />
-              <input type='password' value={this.state.password} onChange={this.update('password')} placeholder='Password' />
-              <Button variant='contained' color='primary' type='submit'>Sign Up</Button>
-            </div>
-            <div className='demo-signup'>
-              <Button variant='contained' color='primary' className='ds-btn' onClick={this.loginDemonUser}>Demo Login</Button>
-            </div>
-            <p className='ask-account'>Have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/login'>Log In</Link></span></p>
-          </form>
-        </div>
-      )
-    } else {
-      return (
-        <div className='splash-container'>
-          <div className='signup-form-container'>
-            <form onSubmit={this.handleSubmit} className='signup-box'>
-              <h1>TriviaMaster</h1>
-              {this.renderErrors()}
-              <div className='signup-form'>
-                <input type='email' value={this.state.email} onChange={this.update('email')} placeholder='Email' />
-                <input type='text' value={this.state.username} onChange={this.update('username')} placeholder='Username' />
-                <input type='password' value={this.state.password} onChange={this.update('password')} placeholder='Password' />
-                <button type='submit'>Sign Up</button>
-              </div>
-              <div className='demo-signup'>
-                <button className='demo-login-button-splash' onClick={this.loginDemonUser}>Demo Login</button>
-              </div>
-            </form>
-            <div className='splash-ask'>
-              <p className='ask-account'>Have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/login'>Log In</Link></span></p>
-            </div>
+    return (
+      <div className='signup-container'>
+        <img src={window.logoURL} className='s-logo' />
+        <form onSubmit={this.handleSubmit} className='signup-box'>
+          <p className='sf-header'>It's trivia time! Log in or create an account below!</p>
+          <p className='signup-errors'>{this.renderErrors()}</p>
+          <div className='signup-form'>
+            <p>Email:</p>
+            <TextField id='standard-basic' type='email' value={this.state.email} onChange={this.update('email')} />
+            <p>Username:</p>
+            <TextField id='standard-basic' type='text' value={this.state.username} onChange={this.update('username')} />
+            <p>Password:</p>
+            <TextField id='standard-basic' type='password' value={this.state.password} onChange={this.update('password')}/>
           </div>
-        </div>
-      )
-    }
-  }
+          <Button variant='contained' color='primary' type='submit' className='signup-btn'>Sign Up</Button>
+          <div className='demo-signup'>
+            <Button variant='contained' color='primary' className='ds-btn' onClick={this.loginDemonUser}>Demo Login</Button>
+          </div>
+          <p className='ask-account'>Have an account? <span className='login'><Link onClick={this.props.clearErrors} to='/login'>Log In</Link></span></p>
+        </form>
+      </div>
+    )
+  } 
 }
 
 export default SignupForm;

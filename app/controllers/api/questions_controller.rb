@@ -20,6 +20,12 @@ class Api::QuestionsController < ApplicationController
     render :index
   end 
 
+  def categoryIndex 
+    category = Category.find(params[:category_id])
+    @categoryQuestions = Category.questions.includes(:category)
+    render :index
+  end
+
   private 
 
   def question_params 

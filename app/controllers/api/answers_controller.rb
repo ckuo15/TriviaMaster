@@ -13,13 +13,14 @@ class Api::AnswersController < ApplicationController
   end 
 
   def index
-    question = Question.find(params[:question_id])
-    @answers = question.answers.includes(:question)
+    # question = Question.find(params[:question_id])
+    @answers = Answer.all
     render :index
   end 
 
   private
 
   def answer_params 
-    params.require(:answer).permit(:question_id, :body, :correct)
+    params.require(:answer).permit(:question_id, :body)
+  end
 end

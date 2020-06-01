@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 
 class NavBar extends React.Component {
@@ -15,15 +16,19 @@ class NavBar extends React.Component {
 
   render(){
     return (
-      <div>
-        <img src={navbarLogo}/>
-        <button onClick={this.handleSubmit}>Log out</button>
-        <Link to={`/users/${this.props.currentUser}/questions`}>
-          show all questions
+      <div className='navbar-container'>
+        <Link to="/">
+          <img src={navbarLogo} className='nav-logo'/>
         </Link>
-        <Link to="/create">
-          create new question
-        </Link>
+        <div className='nav-right'>
+          <Link to={`/users/${this.props.currentUser}/questions`}>
+            <span className='view-questions'>View My Questions</span>
+          </Link>
+          <Link to="/create">
+            <span className='create-question'>Create New Question</span>
+          </Link>
+          <Button variant='contained' color='primary' onClick={this.handleSubmit}>Log out</Button>
+        </div>
       </div>
     )
   }
