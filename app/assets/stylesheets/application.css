@@ -62,7 +62,7 @@ table {
 /* styling for splash page */
 
 .signup-container{
-  background-image: url("/assets/splash-background.jpg");
+  background-image: url("splash-background.jpg");
   height: 100vh;
   display: flex;
   flex-direction: column;
