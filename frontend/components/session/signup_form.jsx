@@ -54,11 +54,11 @@ class SignupForm extends React.Component {
           <p className='signup-errors'>{this.renderErrors()}</p>
           <div className='signup-form'>
             <p>Email:</p>
-            <TextField id='standard-basic' type='email' value={this.state.email} onChange={this.update('email')} />
+            <TextField id='standard-basic' autoComplete='off' type='email' value={this.state.email} onChange={this.update('email')} />
             <p>Username:</p>
-            <TextField id='standard-basic' type='text' value={this.state.username} onChange={this.update('username')} />
+            <TextField id='standard-basic' autoComplete='off' type='text' value={this.state.username} onChange={this.update('username')} />
             <p>Password:</p>
-            <TextField id='standard-basic' type='password' value={this.state.password} onChange={this.update('password')}/>
+            <TextField id='standard-basic' autoComplete='off' type='password' value={this.state.password} onChange={this.update('password')}/>
           </div>
           <Button variant='contained' color='primary' type='submit' className='signup-btn'>Sign Up</Button>
           <div className='demo-signup'>

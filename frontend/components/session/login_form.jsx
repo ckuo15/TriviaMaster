@@ -52,12 +52,12 @@ class LoginForm extends React.Component {
         <div className='signup-container'>
           <img src={window.logoURL} className='l-logo' />
           <form onSubmit={this.handleSubmit} className='login-box'>
-            {this.renderErrors()}
+            <p className='login-errors'>{this.renderErrors()}</p>
             <div className='login-form'>
               <p>Username:</p>
-              <TextField id='standard-basic' type='text' value={this.state.username} onChange={this.update('username')}/>
+              <TextField id='standard-basic' autoComplete='off' type='text' value={this.state.username} onChange={this.update('username')}/>
               <p>Password:</p>
-              <TextField id='standard-basic' type='password' value={this.state.password} onChange={this.update('password')}/>
+              <TextField id='standard-basic' autoComplete='off' type='password' value={this.state.password} onChange={this.update('password')}/>
             </div>
             <Button variant='contained' color='primary'type='submit'>Log In</Button>
             <Button variant='contained' color='primary' className='demo-login-button-login' onClick={this.loginDemonUser}>Demo Login</Button>
