@@ -22,10 +22,10 @@ const App = (props) => {
       <Route exact path='/' component={renderedComponent} /> 
       <AuthRoute exact path='/signup' component={SignupFormContainer} />
       <AuthRoute exact path='/login' component={LogInFormContainer} />
-      <Route path='/users/:userId/questions' component={QuestionsIndexContainer} />
+      <ProtectedRoute path='/users/:userId/questions' component={QuestionsIndexContainer} />
       {/* <Route path='/categories/:categoryId' component={CategoriesItem}/> */}
-      <Route path='/create' component={FormContainer} />
-      <Route path='/categories/:categoryId' component={CategoryItemShow}/>
+      <ProtectedRoute path='/create' component={FormContainer} />
+      {/* <ProtectedRoute path='/categories/:categoryId' component={CategoryItemShow}/> */}
     </div>
   )
 }
