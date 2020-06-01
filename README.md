@@ -18,4 +18,4 @@
  ## Features:
   * User authentication
   * Question and answer creation
-  * Categories
+  * Categories selection
