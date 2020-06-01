@@ -107,7 +107,7 @@ var RECEIVE_ANSWER = 'RECEIVE_ANSWER';
 var receiveAnswers = function receiveAnswers(answers) {
   return {
     type: RECEIVE_ANSWERS,
-    questions: questions
+    answers: answers
   };
 };
 
@@ -118,9 +118,9 @@ var receiveAnswer = function receiveAnswer(answer) {
   };
 };
 
-var fetchAnswers = function fetchAnswers(userId, questionId) {
+var fetchAnswers = function fetchAnswers() {
   return function (dispatch) {
-    return _utils_answer_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswers"](userId, questionId).then(function (answers) {
+    return _utils_answer_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswers"]().then(function (answers) {
       return dispatch(receiveAnswers(answers));
     });
   };
@@ -644,8 +644,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -696,6 +694,11 @@ var Form = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(Form, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchQuestions(this.props.currentUser); // .then(() => console.log((Object.keys(this.props.questions).length)))
+    }
+  }, {
     key: "handleCategory",
     value: function handleCategory(e) {
       this.setState({
@@ -711,25 +714,22 @@ var Form = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleResponse",
-    value: function handleResponse(field) {
-      var _this2 = this;
-
-      return function (e) {
-        _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-      };
+    value: function handleResponse(e) {
+      this.setState({
+        response: e.target.value
+      });
     }
   }, {
     key: "handleAnswer",
     value: function handleAnswer() {
       this.props.createAnswer({
-        body: this.state.response,
-        question_id: parseInt(Object.keys(this.props.questions)[0])
+        body: this.state.response
       });
     }
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      var _this3 = this;
+      var _this2 = this;
 
       e.preventDefault();
       this.props.createQuestion({
@@ -737,12 +737,16 @@ var Form = /*#__PURE__*/function (_React$Component) {
         category_id: this.state.category,
         user_id: this.props.currentUser
       }).then(function () {
-        _this3.setState({
-          question: '',
-          response: ''
+        _this2.props.createAnswer({
+          body: _this2.state.response,
+          question_id: Object.keys(_this2.props.questions).length
         });
       }).then(function () {
-        _this3.handleAnswer;
+        _this2.setState({
+          question: '',
+          response: '',
+          category: ''
+        });
       });
     } // parseInt(Object.keys(this.props.questions)[0])
 
@@ -765,10 +769,13 @@ var Form = /*#__PURE__*/function (_React$Component) {
         fullWidth: true,
         value: this.state.question,
         onChange: this.handleQuestion
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Answer:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Answer:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["TextField"], {
+        id: "outlined-basic",
+        autoComplete: "off",
+        fullWidth: true,
         type: "text",
-        value: this.state.response1,
-        onChange: this.handleResponse('response')
+        value: this.state.response,
+        onChange: this.handleResponse
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Pick a Category:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         onChange: this.handleCategory,
         className: "form-category"
@@ -1100,7 +1107,6 @@ var QuestionIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(Object.values(this.props.questions));
       var categoryName = {
         1: "Music",
         2: "Animal",
@@ -1151,14 +1157,17 @@ var QuestionIndex = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/question_actions */ "./frontend/actions/question_actions.js");
-/* harmony import */ var _questions_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./questions_index */ "./frontend/components/questions/questions_index.jsx");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _questions_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./questions_index */ "./frontend/components/questions/questions_index.jsx");
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    questions: state.questions
+    questions: state.questions,
+    currentUser: state.session.id
   };
 };
 
@@ -1166,11 +1175,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchQuestions: function fetchQuestions(userId) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_1__["fetchQuestions"])(userId));
+    },
+    fetchAnswers: function fetchAnswers() {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAnswers"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_questions_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_questions_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -2030,17 +2042,22 @@ var usersReducer = function usersReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
+/* harmony import */ var _reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/root_reducer */ "./frontend/reducers/root_reducer.js");
 
 
 
+var middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]];
 
+if (true) {
+  var _require = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js"),
+      logger = _require.logger;
+
+  middlewares.push(logger);
+}
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_2___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_2__["default"], preloadedState, redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"].apply(void 0, [redux_thunk__WEBPACK_IMPORTED_MODULE_1__["default"]].concat(middlewares)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -2058,10 +2075,10 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAnswers", function() { return fetchAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAnswer", function() { return createAnswer; });
-var fetchAnswers = function fetchAnswers(userId, questionId) {
+var fetchAnswers = function fetchAnswers() {
   return $.ajax({
     method: "GET",
-    url: "/api/users/".concat(userId, "/questions/").concat(questionId, "/answers")
+    url: 'api/answers'
   });
 };
 var createAnswer = function createAnswer(answer) {

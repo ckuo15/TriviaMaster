@@ -5,7 +5,7 @@ export const RECEIVE_ANSWER = 'RECEIVE_ANSWER';
 
 const receiveAnswers = answers => ({
   type: RECEIVE_ANSWERS,
-  questions
+  answers
 });
 
 const receiveAnswer = answer => ({
@@ -13,8 +13,8 @@ const receiveAnswer = answer => ({
   answer
 });
 
-export const fetchAnswers = (userId, questionId) => dispatch => (
-  AnswerAPIUtil.fetchAnswers(userId, questionId).then(answers => dispatch(receiveAnswers(answers)))
+export const fetchAnswers = () => dispatch => (
+  AnswerAPIUtil.fetchAnswers().then(answers => dispatch(receiveAnswers(answers)))
 );
 
 export const createAnswer = answer => dispatch => (

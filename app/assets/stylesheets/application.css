@@ -307,6 +307,10 @@ table {
 
   overflow-y: auto;
 }
+
+.questions-index ul{
+  height: 400px;
+}
 .category-names-container{
   display: flex;
   flex-direction: column;
@@ -345,4 +349,5 @@ table {
 .q-category-item{
   margin-left: 10px;
   color: blue;
+  margin-bottom: 10px;
 }

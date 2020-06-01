@@ -14,7 +14,6 @@ class QuestionIndex extends React.Component{
 
 
   render(){
-    console.log(Object.values(this.props.questions))
     const categoryName ={
       1: "Music",
       2: "Animal",

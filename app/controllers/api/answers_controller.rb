@@ -13,8 +13,8 @@ class Api::AnswersController < ApplicationController
   end 
 
   def index
-    question = Question.find(params[:question_id])
-    @answers = question.answers.includes(:question)
+    # question = Question.find(params[:question_id])
+    @answers = Answer.all
     render :index
   end 
 

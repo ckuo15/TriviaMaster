@@ -18,6 +18,11 @@ class Form extends React.Component {
     this.handleAnswer = this.handleAnswer.bind(this);
   }
 
+  componentDidMount(){
+    this.props.fetchQuestions(this.props.currentUser)
+    // .then(() => console.log((Object.keys(this.props.questions).length)))
+  }
+
   handleCategory(e){
     this.setState({
       category: e.target.value
@@ -30,16 +35,15 @@ class Form extends React.Component {
     })
   }
 
-  handleResponse(field){
-    return e => {
-      this.setState({ [field]: e.currentTarget.value})
-    }
+  handleResponse(e){
+    this.setState({
+      response: e.target.value
+    })
   };
 
   handleAnswer(){
     this.props.createAnswer({
       body: this.state.response,
-      question_id: parseInt(Object.keys(this.props.questions)[0])
     })
   }
 
@@ -50,8 +54,13 @@ class Form extends React.Component {
       category_id: this.state.category, 
       user_id: this.props.currentUser
     }).then(() => {
-      this.setState({question:'', response:''})
-    }).then(()=> {this.handleAnswer})
+      this.props.createAnswer({
+        body: this.state.response,
+        question_id: (Object.keys(this.props.questions).length)
+      })
+    }).then(() => {
+      this.setState({question:'', response:'', category:''})
+    })
   }
 
   // parseInt(Object.keys(this.props.questions)[0])
@@ -65,7 +74,7 @@ class Form extends React.Component {
               <p>Question:</p>
               <TextField id="outlined-basic" autoComplete='off'type='text' fullWidth value={this.state.question} onChange={this.handleQuestion}/>
               <p>Answer:</p>
-              <input type='text'value={this.state.response1} onChange={this.handleResponse('response')}/>
+              <TextField id='outlined-basic' autoComplete='off' fullWidth type='text'value={this.state.response} onChange={this.handleResponse}/>
               <p>Pick a Category:</p>
               <div onChange={this.handleCategory} className='form-category'>
                 <input type='radio' name='category' id='music' value='1' checked={this.state.category === "1"}/>
